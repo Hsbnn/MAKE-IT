@@ -1,0 +1,62 @@
+@startuml
+
+
+class Website {
+-AudioFile
+-VideoFile
+-ProcessedCommandList
+-DepthVideo
+-RGBVideoWithSubtitles
+-----
++UploadingFiles
++ShowingUserFiles
++ShowingCommandList
++ShowingVideoList
++DownloadingFiles
+}
+
+class AudioProcessor {
+-AudioFile
+-MLAudioModel
+---
++GetTextFromAudio
++LookingForACommand
++MakingSubtitles
+}
+
+class VideoSplitProcessor{
+-VideoFile
+---
++VideoFileSplitting
+}
+
+class RGBVideoWithSubtitles{
+-VideoSplitForRGB
+-SubtitlesFile
+---
++MakingRGBVideo
++AddingSubtitlesToVideo
+}
+class DepthVideo{
+-VideoSplitForDepth
+---
++MakingDepthVideo
+}
+class AudioCutProcessor {
+-AudioFIle
+-SubtitlesFile
+---
++AudioCutting
+}
+
+
+AudioProcessor --> RGBVideoWithSubtitles:SubtitlesFile
+Website--> AudioProcessor:AudioFile
+Website --> VideoSplitProcessor:VideoFile
+AudioProcessor --> AudioCutProcessor:SubtitlesFile, AudioFile
+AudioCutProcessor --> Website:ProcessedCommandList
+VideoSplitProcessor --> RGBVideoWithSubtitles:VideoSplitForRGB
+VideoSplitProcessor --> DepthVideo:VideoSplitForDepth
+RGBVideoWithSubtitles --> Website:RGBVideoWithSubtitles
+DepthVideo --> Website:DepthVideo
+@enduml
