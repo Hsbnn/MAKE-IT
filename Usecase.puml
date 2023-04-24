@@ -1,0 +1,27 @@
+@startumlleft to right direction
+skinparam packageStyle rect
+actor TeamLeader
+actor Tester
+actor Developer
+actor TechLeader
+actor Potential_User
+rectangle UseCase {
+Potential_User <-> (WebApp)
+TechLeader -> (ProjectPresentation)
+Developer -> (ML)
+Developer -> (Backend)
+TechLeader -> (Research)
+Developer -> (Frontend)
+(WebApp) <.> (Frontend)
+TeamLeader -> (DistributionOfTasks)
+TeamLeader -> (ProjectPresentation)
+(DistributionOfTasks) .> Tester
+(DistributionOfTasks) .> TechLeader
+(DistributionOfTasks) .> Developer
+Tester -> (Tests)
+(Tests) .> (ML)
+(Tests) .> (Backend)
+(Tests) .> (WebApp)
+}
+@enduml
+
